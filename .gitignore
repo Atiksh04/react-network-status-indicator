@@ -1,0 +1,12 @@
+# Dependency directories
+node_modules/
+
+# Build directories
+dist/
+coverage/
+
+# IDE specific
+.vscode/
+
+# Package manager files
+package-lock.json

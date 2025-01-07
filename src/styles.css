@@ -1,0 +1,36 @@
+.network-status-indicator {
+    position: fixed;
+    padding: 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .network-status-indicator--top-left {
+    top: 16px;
+    left: 16px;
+  }
+  
+  .network-status-indicator--top-right {
+    top: 16px;
+    right: 16px;
+  }
+  
+  .network-status-indicator--bottom-left {
+    bottom: 16px;
+    left: 16px;
+  }
+  
+  .network-status-indicator--bottom-right {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .network-status-indicator--online {
+    background-color: #28a745;
+  }
+  
+  .network-status-indicator--offline {
+    background-color: #dc3545;
+  }
