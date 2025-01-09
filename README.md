@@ -34,6 +34,7 @@ A lightweight React library to monitor and display network status with customiza
   - Custom text for online/offline messages.
   - Configurable message durations.
   - Adjustable positioning of the notifier.
+  - Completely customizable styling
 
 ---
 
@@ -133,9 +134,12 @@ function useNetworkStatus(): {
   connectionType: string;
   hasNetworkChanged: boolean;
 }
+```
+
+
 Example Usage
-tsx
-Copy code
+
+```javascript
 import React from 'react';
 import { useNetworkStatus } from 'react-network-status-indicator';
 
@@ -156,13 +160,9 @@ export default NetworkInfo;
 ## Custom Styles
 Add custom styles via the style prop or CSS classes.
 
+Example with CSS
 
 ```javascript
-Example with CSS
-styles.css:
-
-css
-Copy code
 .custom-network-notifier {
   font-size: 16px;
   padding: 10px;
