@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 declare global {
   interface Navigator {
@@ -13,39 +13,74 @@ interface NetworkInformation extends EventTarget {
   removeEventListener(type: string, listener: EventListener): void;
 }
 
+/** A custom React hook to monitor and return the current network status and whether the network has changed */
+export function useNetworkStatus(): {
+  isOnline: boolean | null;
+  connectionType: string;
+  hasNetworkChanged: boolean;
+} {
+  const [stateVariable, setStateVariable] = useState<{
+    isOnline: boolean | null;
+    connectionType: string;
+    hasNetworkChanged: boolean;
+  }>({
+    isOnline: null, // Initial state is null
+    connectionType: "unknown",
+    hasNetworkChanged: false,
+  });
 
-/** A custom React hook to monitor and return the current network status */
-export function useNetworkStatus(): { isOnline: boolean; connectionType: string } {
-  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
-  const [connectionType, setConnectionType] = useState<string>(
-    navigator.connection?.effectiveType || 'unknown'
-  );
+  const previousStatus = useRef<boolean | null>(null);
 
   useEffect(() => {
     const updateOnlineStatus = () => {
-      setIsOnline(navigator.onLine);
+      const newStatus = navigator.onLine;
+
+      // Update only if the online status actually changes
+      if (previousStatus.current !== newStatus) {
+        previousStatus.current = newStatus;
+        setStateVariable((prev) => ({
+          ...prev,
+          isOnline: newStatus,
+          hasNetworkChanged: prev.isOnline !== null,
+        }));
+      }
     };
 
     const updateConnectionType = () => {
-      setConnectionType(navigator.connection?.effectiveType || 'unknown');
+      const newConnectionType = navigator.connection?.effectiveType || "unknown";
+
+      // Update only if the connection type changes
+      setStateVariable((prev) =>
+        newConnectionType !== prev.connectionType
+          ? { ...prev, connectionType: newConnectionType }
+          : prev
+      );
     };
 
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
+    // Initialize state on mount
+    previousStatus.current = navigator.onLine;
+    setStateVariable((prev) => ({
+      ...prev,
+      isOnline: navigator.onLine,
+      connectionType: navigator.connection?.effectiveType || "unknown",
+    }));
+
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
 
     if (navigator.connection) {
-      navigator.connection.addEventListener('change', updateConnectionType);
+      navigator.connection.addEventListener("change", updateConnectionType);
     }
 
     return () => {
-      window.removeEventListener('online', updateOnlineStatus);
-      window.removeEventListener('offline', updateOnlineStatus);
+      window.removeEventListener("online", updateOnlineStatus);
+      window.removeEventListener("offline", updateOnlineStatus);
 
       if (navigator.connection) {
-        navigator.connection.removeEventListener('change', updateConnectionType);
+        navigator.connection.removeEventListener("change", updateConnectionType);
       }
     };
   }, []);
 
-  return { isOnline, connectionType };
+  return stateVariable;
 }

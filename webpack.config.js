@@ -8,7 +8,7 @@ module.exports = [
       path: path.resolve(__dirname, 'dist'),
       filename: 'index.js',
       library: {
-        name: 'NetworkStatusIndicator',
+        name: 'NetworkStatusNotifier',
         type: 'umd',
       },
       globalObject: 'this',

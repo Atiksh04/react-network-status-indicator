@@ -1,4 +1,4 @@
-.network-status-indicator {
+.network-status-notifier {
     position: fixed;
     padding: 12px;
     border-radius: 4px;
@@ -7,30 +7,30 @@
     font-weight: 500;
   }
   
-  .network-status-indicator--top-left {
+  .network-status-notifier--top-left {
     top: 16px;
     left: 16px;
   }
   
-  .network-status-indicator--top-right {
+  .network-status-notifier--top-right {
     top: 16px;
     right: 16px;
   }
   
-  .network-status-indicator--bottom-left {
+  .network-status-notifier--bottom-left {
     bottom: 16px;
     left: 16px;
   }
   
-  .network-status-indicator--bottom-right {
+  .network-status-notifier--bottom-right {
     bottom: 16px;
     right: 16px;
   }
   
-  .network-status-indicator--online {
+  .network-status-notifier--online {
     background-color: #28a745;
   }
   
-  .network-status-indicator--offline {
+  .network-status-notifier--offline {
     background-color: #dc3545;
   }

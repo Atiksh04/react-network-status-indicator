@@ -1,3 +1,3 @@
 
 export { useNetworkStatus } from './NetworkStatusHook';
-export { NetworkStatusIndicator } from './NetworkStatusIndicator';
+export { NetworkStatusNotifier } from './NetworkStatusNotifier';
