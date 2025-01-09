@@ -1,6 +1,6 @@
 {
   "name": "react-network-status-indicator",
-  "version": "1.1.1",
+  "version": "1.0.1",
   "description": "Network status hook and indicator for react apps",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -39,6 +39,10 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atiksh04/react-network-status-indicator.git"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
